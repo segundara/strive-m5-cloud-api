@@ -179,7 +179,7 @@ booksRouter.get("/:asin/comments", async (req, res, next) => {
                 const newComment ={
                     commentID:uniqid(), 
                     ...req.body, 
-                    bookId: req.params.asin, 
+                    //bookId: req.params.asin, 
                     date: new Date() 
                 }
                 
