@@ -135,7 +135,6 @@ booksRouter.post("/upload", upload.single("avatar"), async (req, res, next) => {
 
 booksRouter.get("/:asin/comments", async (req, res, next) => {
     try {
-      //const dataForBooks = await readDB(booksJsonPath)
       const dataForComments = await readDB(commentsJsonPath)
 
       const data = dataForComments.filter(comment => comment.bookId === req.params.asin)
@@ -194,9 +193,10 @@ booksRouter.get("/:asin/comments", async (req, res, next) => {
       const err = new Error("While reading comment list a problem occurred!")
       next(err)
     }
-    
-    
+        
   })
+
+
   booksRouter.delete("/:asin/comments/:commentID", async(req, res, next)=>{
     try {
       const commentDb = await readDB(commentsJsonPath)
@@ -209,7 +209,6 @@ booksRouter.get("/:asin/comments", async (req, res, next) => {
         error.httpStatusCode = 404
         next(error)
       }
-     // res.send(commentFilterd)
     } catch (error) {
       console.log(error)
       next("While reading books list a problem occurred!")
