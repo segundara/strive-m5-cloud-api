@@ -197,15 +197,15 @@ booksRouter.get("/:asin/comments", async (req, res, next) => {
     
     
   })
-  booksRouter.delete("/:asin/comments/:CommentID", async(req, res, next)=>{
+  booksRouter.delete("/:asin/comments/:commentID", async(req, res, next)=>{
     try {
       const commentDb = await readDB(commentsJsonPath)
-      const commentFilterd = commentDb.find((c)=> c.CommentID===req.params.CommentID)
+      const commentFilterd = commentDb.find((c)=> c.commentID===req.params.commentID)
       if(commentFilterd ){
-        await writeDB(commentsJsonPath, commentDb.filter((x) => x.CommentID !== req.params.CommentID))
+        await writeDB(commentsJsonPath, commentDb.filter((x) => x.commentID !== req.params.commentID))
         res.send("Deleted")
       }else{
-        const error = new Error(`Book with asin ${req.params.CommentID} not found`)
+        const error = new Error(`Book with asin ${req.params.commentID} not found`)
         error.httpStatusCode = 404
         next(error)
       }
