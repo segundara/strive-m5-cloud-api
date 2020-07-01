@@ -26,6 +26,20 @@ booksRouter.get("/", async (req, res, next) => {
   }
 })
 
+
+booksRouter.get("/:category", async (req, res, next) => {
+  try {
+    const books = await readDB(booksJsonPath)
+    const filteredBooks = books.filter(book => book.category === req.params.category)
+
+    res.send({ numberOfItems: filteredBooks.length, filteredBooks })
+  } catch (error) {
+    console.log(error)
+    const err = new Error("While reading books list a problem occurred!")
+    next(err)
+  }
+})
+
 booksRouter.get("/:asin", async (req, res, next) => {
   try {
     const books = await readDB(booksJsonPath)
