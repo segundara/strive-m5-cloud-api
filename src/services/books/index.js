@@ -19,9 +19,9 @@ booksRouter.get("/", async (req, res, next) => {
     const data = await readDB(booksJsonPath)
 
     if (req.query && req.query.category) {
-      const data = data.filter(book => book.category === req.query.category)
-      if (data.length > 0) {
-        res.send({ numberOfItems: data.length, data })
+      const catData = data.filter(book => book.category === req.query.category)
+      if (catData.length > 0) {
+        res.send({ numberOfItems: catData.length, catData })
       } else {
           const err = new Error()
           err.message = "No book for this category yet!"
