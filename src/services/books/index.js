@@ -77,7 +77,6 @@ booksRouter.post(
       const books = await readDB(booksJsonPath)
       const asinCheck = books.find((x) => x.asin === req.body.asin) //get a previous element with the same asin
       if (asinCheck) {
-        //if there is one, just abort the operation
         const error = new Error()
         error.httpStatusCode = 400
         error.message = "ASIN should be unique"
